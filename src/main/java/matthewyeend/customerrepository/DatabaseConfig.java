@@ -14,7 +14,6 @@ import com.zaxxer.hikari.HikariDataSource;
 public final class DatabaseConfig {
 
     private DatabaseConfig() {
-        // Utility class
     }
 
     public static HikariDataSource createDataSource() {
@@ -23,16 +22,17 @@ public final class DatabaseConfig {
         config.setUsername(requireEnv("DB_USER"));
         config.setPassword(requireEnv("DB_PASSWORD"));
         config.setMaximumPoolSize(5);
-        config.setConnectionTimeout(10_000);
+
         return new HikariDataSource(config);
     }
 
     private static String requireEnv(String name) {
         String value = System.getenv(name);
+
         if (value == null || value.isBlank()) {
-            // Fail fast, and never print the value.
-            throw new IllegalStateException("Missing required environment variable: " + name);
+            throw new IllegalStateException("Missing environment variable: " + name);
         }
+
         return value;
     }
 }

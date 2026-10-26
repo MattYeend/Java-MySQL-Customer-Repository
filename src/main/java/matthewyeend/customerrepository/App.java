@@ -4,8 +4,8 @@
  */
 package matthewyeend.customerrepository;
 
-import com.zaxxer.hikari.HikariDataSource;
 import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
+import com.zaxxer.hikari.HikariDataSource;
 
 /**
  *

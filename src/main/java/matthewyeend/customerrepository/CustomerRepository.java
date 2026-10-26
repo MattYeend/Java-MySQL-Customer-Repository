@@ -36,12 +36,12 @@ public class CustomerRepository {
                      connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, customer.fullName());
-            statement.setString(2, customer.email());
+            statement.setString(2, customer.email().strip().toLowerCase());
             statement.executeUpdate();
 
             try (ResultSet keys = statement.getGeneratedKeys()) {
                 if (keys.next()) {
-                    return new Customer(keys.getLong(1), customer.fullName(), customer.email());
+                    return new Customer(keys.getLong(1), customer.fullName(), customer.email().strip().toLowerCase());
                 }
                 throw new DataAccessException("Customer saved but no ID was returned", null);
             }
